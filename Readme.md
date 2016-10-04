@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Дмитрий Валак](https://up.htmlacademy.ru/javascript/7/user/33812).
-* Наставник: `Неизвестно`.
+* Наставник: [Олег Плотников](https://htmlacademy.ru/profile/id230042).
 
 ---
 
