@@ -98,6 +98,8 @@
       // Смещение первого штриха от начала линии.
       this._ctx.lineDashOffset = 7;
 
+      this._ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+
       // Сохранение состояния канваса.
       this._ctx.save();
 
@@ -126,6 +128,39 @@
       // некорректно сработает даже очистка холста или нужно будет использовать
       // сложные рассчеты для координат прямоугольника, который нужно очистить.
       this._ctx.restore();
+
+      // Верхний прямоугольник
+      this._ctx.beginPath();
+      this._ctx.moveTo(0, 0);
+      this._ctx.lineTo(450, 0);
+      this._ctx.lineTo(450, 35);
+      this._ctx.lineTo(0, 35);
+      this._ctx.lineTo(0, 0);
+      this._ctx.fill();
+
+      // Правый прямоугольник
+      this._ctx.beginPath();
+      this._ctx.moveTo(340, 35);
+      this._ctx.lineTo(450, 35);
+      this._ctx.lineTo(450, 275);
+      this._ctx.lineTo(340, 275);
+      this._ctx.fill();
+
+      // Нижний прямоугольник
+      this._ctx.beginPath();
+      this._ctx.moveTo(0, 275);
+      this._ctx.lineTo(450, 275);
+      this._ctx.lineTo(450, 320);
+      this._ctx.lineTo(0, 320);
+      this._ctx.fill();
+
+      // Левый прямоугольник
+      this._ctx.beginPath();
+      this._ctx.moveTo(0, 35);
+      this._ctx.lineTo(100, 35);
+      this._ctx.lineTo(100, 275);
+      this._ctx.lineTo(0, 275);
+      this._ctx.fill();
     },
 
     /**

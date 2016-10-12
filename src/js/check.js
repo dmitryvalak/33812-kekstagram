@@ -6,11 +6,11 @@ function getMessage(a, b) {
   var i;
 
   if(typeof a == "boolean") {
-      if(a == true) {
-        message = "Переданное GIF-изображение анимировано и содержит " + b + " кадров";
-      } else {
-        message = "Переданное GIF-изображение не анимировано";
-      }
+    if(a == true) {
+      message = "Переданное GIF-изображение анимировано и содержит " + b + " кадров";
+    } else {
+      message = "Переданное GIF-изображение не анимировано";
+    }
   }
 
   if(typeof a == "number") {
