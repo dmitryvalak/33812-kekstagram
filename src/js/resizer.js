@@ -80,6 +80,7 @@
      * Отрисовка канваса.
      */
     redraw: function() {
+
       // Очистка изображения.
       this._ctx.clearRect(0, 0, this._container.width, this._container.height);
 
@@ -121,6 +122,45 @@
           this._resizeConstraint.side - this._ctx.lineWidth / 2,
           this._resizeConstraint.side - this._ctx.lineWidth / 2);
 
+
+      // Draw mask rectangles
+      var rightX = this._container.width / 2,
+          bottomY = this._container.height / 2,
+          xy1 = (-this._resizeConstraint.side / 2) - this._ctx.lineWidth,
+          xy2 = (this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2;
+
+      // Rectangles coords
+      var topRect    = [displX, displY, rightX, displY, rightX, xy1, displX, xy1],
+          rightRect  = [rightX, xy1, rightX, xy2, xy2, xy2, xy2, xy1],
+          bottomRect = [displX, bottomY, rightX, bottomY, rightX, xy2, displX, xy2],
+          leftRect   = [displX, xy1, xy1, xy1, xy1, xy2, displX, xy2];
+
+      var drawRect = function(el, coords) {
+        el.beginPath();
+
+        el.moveTo(coords[0], coords[1]);
+        el.lineTo(coords[2], coords[3]);
+        el.lineTo(coords[4], coords[5]);
+        el.lineTo(coords[6], coords[7]);
+
+        el.fill();
+      }
+
+      drawRect(this._ctx, topRect);
+      drawRect(this._ctx, rightRect);
+      drawRect(this._ctx, bottomRect);
+      drawRect(this._ctx, leftRect);
+
+
+      // Image original size
+      var imageSize = this._image.naturalWidth + " x " + this._image.naturalHeight;
+
+      this._ctx.font = "14px 'Open Sans', Arial";
+      this._ctx.fillStyle = "#ffffff";
+      this._ctx.textAlign = "center";
+      this._ctx.fillText(imageSize, 0, (-this._resizeConstraint.side / 2) - this._ctx.lineWidth - 5);
+
+
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
       // следующий кадр рисовался с привычной системой координат, где точка
@@ -128,39 +168,6 @@
       // некорректно сработает даже очистка холста или нужно будет использовать
       // сложные рассчеты для координат прямоугольника, который нужно очистить.
       this._ctx.restore();
-
-      // Верхний прямоугольник
-      this._ctx.beginPath();
-      this._ctx.moveTo(0, 0);
-      this._ctx.lineTo(450, 0);
-      this._ctx.lineTo(450, 35);
-      this._ctx.lineTo(0, 35);
-      this._ctx.lineTo(0, 0);
-      this._ctx.fill();
-
-      // Правый прямоугольник
-      this._ctx.beginPath();
-      this._ctx.moveTo(340, 35);
-      this._ctx.lineTo(450, 35);
-      this._ctx.lineTo(450, 275);
-      this._ctx.lineTo(340, 275);
-      this._ctx.fill();
-
-      // Нижний прямоугольник
-      this._ctx.beginPath();
-      this._ctx.moveTo(0, 275);
-      this._ctx.lineTo(450, 275);
-      this._ctx.lineTo(450, 320);
-      this._ctx.lineTo(0, 320);
-      this._ctx.fill();
-
-      // Левый прямоугольник
-      this._ctx.beginPath();
-      this._ctx.moveTo(0, 35);
-      this._ctx.lineTo(100, 35);
-      this._ctx.lineTo(100, 275);
-      this._ctx.lineTo(0, 275);
-      this._ctx.fill();
     },
 
     /**
