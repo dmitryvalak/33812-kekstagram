@@ -75,6 +75,55 @@
     return true;
   };
 
+
+  var resizeX = document.getElementById("resize-x"),
+      resizeY = document.getElementById("resize-y"),
+      resizeSize = document.getElementById("resize-size"),
+      sendBtn = document.getElementById("resize-fwd");
+
+  var checkResize = function() {
+
+    var xValue = resizeX.value,
+        yValue = resizeY.value,
+        resizeValue = resizeSize.value,
+        imageW = currentResizer._image.naturalWidth,
+        imageH = currentResizer._image.naturalHeight;
+
+    if((xValue + resizeValue) > imageW || (yValue + resizeValue) > imageH) {
+      sendBtn.setAttribute("disabled", " ");
+    } else {
+      sendBtn.removeAttribute("disabled");
+    }
+
+    if(xValue < 0) {
+      resizeX.value = 1;
+    }
+
+    if(yValue < 0) {
+      resizeY.value = 1;
+    }
+  }
+
+  resizeX.oninput = function() {
+    checkResize();
+  }
+
+  resizeY.oninput = function() {
+    checkResize();
+  }
+
+  resizeSize.oninput = function() {
+    checkResize();
+  }
+
+
+
+
+
+
+
+
+
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
